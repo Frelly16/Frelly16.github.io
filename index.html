@@ -14,11 +14,11 @@
             margin: 0;
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background-color: #0d0d16c5;
+            background-color: #B3B1B1;
             color: #fff;
         }
         header {
-            background: #222;
+            background: #979595;
             color: #fff;
             padding: 1rem 2rem;
             text-align: center;
@@ -37,14 +37,14 @@
             margin-bottom: 3rem;
         }
         .proyecto {
-            background: #07070cc5;
+            background: #6A6868;
             padding: 1rem;
             border-radius: 5px;
             margin-bottom: 1rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         footer {
-            background: #222;
+            background: #979595;
             color: #fff;
             text-align: center;
             padding: 1rem;
@@ -54,6 +54,34 @@
                 display: block;
                 margin: 0.5rem 0;
             }
+        }
+        #modo-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        body.modo-oscuro {
+            background-color: #121212;
+            color: #eee;
+        }
+
+        body.modo-oscuro header,
+        body.modo-oscuro footer {
+            background-color: #1e1e1e;
+        }
+
+        body.modo-oscuro .proyecto {
+            background-color: #222;
+            color: #ddd;
+        }
+
+        body.modo-oscuro a {
+            color: #89CFF0;
         }
     </style>
 </head>
@@ -66,6 +94,7 @@
             <a href="#proyectos">Proyectos</a>
             <a href="#contacto">Contacto</a>
         </nav>
+        <button id="modo-btn" onclick="alternarModo()">🌙 Modo oscuro </button>>
     </header>
 
     <main class="container">
@@ -101,6 +130,32 @@
     <footer>
         <p>&copy; 2025 Federico Ciccarelli - Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        function alternarModo() {
+        const body = document.body;
+        const btn = document.getElementById('modo-btn');
+        body.classList.toggle('modo-oscuro');
+
+        // Cambiar ícono y texto del botón según el modo
+        if (body.classList.contains('modo-oscuro')) {
+            btn.textContent = "☀️ Modo claro";
+        } else {
+            btn.textContent = "🌙 Modo oscuro";
+        }
+
+        // Guardar preferencia en localStorage
+        localStorage.setItem('modoOscuro', body.classList.contains('modo-oscuro'));
+    }
+
+    // Al cargar la página, aplicar el modo guardado
+    window.onload = function() {
+        if (localStorage.getItem('modoOscuro') === 'true') {
+            document.body.classList.add('modo-oscuro');
+            document.getElementById('modo-btn').textContent = "☀️ Modo claro";
+        }
+    };
+    </script>
 
 </body>
 </html>
